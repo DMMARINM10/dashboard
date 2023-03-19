@@ -8,20 +8,16 @@ import {
     Route,
     RouterProvider,
 } from 'react-router-dom';
+import DashboardPage from '../pages/DashboardPage';
 
 const AppRouter = () => {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route
                 path="/*"
-                element={
-                    <>
-                        root
-                        <Outlet />
-                    </>
-                }
+                element={<Outlet />}
             >
-                <Route path="posts" element={<div>posts</div>} />
+                <Route path="posts" element={<DashboardPage route='posts'/>} />
                 <Route path="comments" element={<div>comments</div>} />
                 <Route path="albums" element={<div>albums</div>} />
                 <Route path="photos" element={<div>photos</div>} />
