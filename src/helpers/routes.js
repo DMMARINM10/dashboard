@@ -1,21 +1,22 @@
-import { getPosts } from "../services/requests"
+import { getComments, getPosts } from "../services/requests"
+import { addCommentPage } from "../store/slices/comments"
 import { addPostPage } from "../store/slices/posts"
 
 export const dataHandling = (route, users, data) => {
-    // console.log(route, users, data)
     if(route === 'posts') {
         const { userId, title, body } = data
         const user = users.find((u) => u.id === userId).username
-        // console.log({
-        //     route,
-        //     user,
-        //     title,
-        //     body
-        // })
         return {
             user,
             title,
             body
+        }
+    } else if(route === 'comments') {
+        const { name: title, body, email: footer } = data
+        return {
+            title,
+            body,
+            footer
         }
     }
 }
@@ -40,5 +41,11 @@ export const request = {
         func: getPosts,
         users: true,
         dispatchFunc: addPostPage
+    },
+    comments: {
+        perPage: 6,
+        func: getComments,
+        users: false,
+        dispatchFunc: addCommentPage
     }
 }

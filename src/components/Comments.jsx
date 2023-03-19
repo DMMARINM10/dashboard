@@ -1,26 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Container from './Container'
-import ImageCard from './ImageCard'
 import TextCard from './TextCard'
 
-const Posts = ({ user, title, body }) => {
+const Comments = ({ title, body, footer }) => {
     const props = {
         title,
-        body
+        body,
+        footer
     }
   return (
     <Container>
-        <ImageCard title={user}/>
         <TextCard {...props}/>
     </Container>
   )
 }
 
-Posts.propTypes = {
-    user: PropTypes.string.isRequired,
+Comments.propTypes = {
     title: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired
+    body: PropTypes.string.isRequired,
+    footer: PropTypes.string.isRequired
 }
 
-export default Posts
+export default Comments

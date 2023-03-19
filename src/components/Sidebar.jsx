@@ -7,6 +7,7 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import GroupIcon from '@mui/icons-material/Group';
 import AllInboxIcon from '@mui/icons-material/AllInbox';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import PropTypes from 'prop-types'
 // import { route } from '../data/routes'
 // import Posts from './Posts';
 import { useNavigate } from 'react-router-dom';
@@ -62,11 +63,11 @@ const useStyles = {
     }
   };
 
-const Sidebar = () => {
+const Sidebar = ({ route }) => {
     const classes = useStyles;
     const navigate = useNavigate()
-    const handleClick = (route) => {
-      navigate(`/${route}`)
+    const handleClick = (routeSidebar) => {
+      if(route !== routeSidebar) navigate(`/${routeSidebar}?page=1`)
     }
 
     const sideList = () => (
@@ -122,6 +123,10 @@ const Sidebar = () => {
             {sideList()}
         </aside>
     );
+}
+
+Sidebar.propTypes = {
+  route: PropTypes.string.isRequired
 }
 
 export default Sidebar

@@ -36,3 +36,7 @@ export const getPosts = (start, limit) => {
 export const getUsers = (start, limit) => {
     return httpRequest('users', start, limit)
 }
+
+export const getComments = (start, limit) => {
+  return httpRequest('comments', start, limit)
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { capitalizedWord } from '../helpers/textUtils'
 
 const TextCard = ({ title, body, footer }) => {
     return (
@@ -17,11 +18,11 @@ const TextCard = ({ title, body, footer }) => {
         <h3 style={{
             margin: '0',
             marginLeft: '10px'
-        }}>{title}</h3>
+        }}>{capitalizedWord(title)}</h3>
         <span style={{
             fontSize: '14px',
             textAlign: 'center'
-        }}>{body}</span>
+        }}>{capitalizedWord(body)}</span>
         <footer style={{
             fontSize: '13px',
             paddingRight: '5px',

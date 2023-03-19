@@ -18,7 +18,7 @@ const AppRouter = () => {
                 element={<Outlet />}
             >
                 <Route path="posts" element={<DashboardPage route='posts'/>} />
-                <Route path="comments" element={<div>comments</div>} />
+                <Route path="comments" element={<DashboardPage route='comments'/>} />
                 <Route path="albums" element={<div>albums</div>} />
                 <Route path="photos" element={<div>photos</div>} />
                 <Route path="todos" element={<div>todos</div>} />
