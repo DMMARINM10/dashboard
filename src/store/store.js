@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { commentsSlice } from './slices/comments';
 import { postsSlice } from './slices/posts';
+import { todosSlice } from './slices/todos';
 import { usersSlice } from './slices/users';
 
 export const store = configureStore({
@@ -8,5 +9,6 @@ export const store = configureStore({
         posts: postsSlice.reducer,
         users: usersSlice.reducer,
         comments: commentsSlice.reducer,
+        todos: todosSlice.reducer,
     },
 });

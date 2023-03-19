@@ -40,3 +40,7 @@ export const getUsers = (start, limit) => {
 export const getComments = (start, limit) => {
     return httpRequest('comments', start, limit);
 };
+
+export const getTodos = (start, limit) => {
+    return httpRequest('todos', start, limit);
+};

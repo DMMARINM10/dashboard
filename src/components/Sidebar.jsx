@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 // import { route } from '../data/routes'
 // import Posts from './Posts';
 import { useNavigate } from 'react-router-dom';
+import { capitalizedWord } from '../helpers/textUtils';
 
 const iconColor = {
     color: 'black',
@@ -102,7 +103,9 @@ const Sidebar = ({ route }) => {
                         }}
                     >
                         <ListItemIcon>{listItem.icon}</ListItemIcon>
-                        <ListItemText primary={listItem.route} />
+                        <ListItemText
+                            primary={capitalizedWord(listItem.route)}
+                        />
                     </li>
                 ))}
                 <li

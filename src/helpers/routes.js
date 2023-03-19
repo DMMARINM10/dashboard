@@ -1,6 +1,12 @@
-import { getComments, getPosts, getUsers } from '../services/requests';
+import {
+    getComments,
+    getPosts,
+    getTodos,
+    getUsers,
+} from '../services/requests';
 import { addCommentPage } from '../store/slices/comments';
 import { addPostPage } from '../store/slices/posts';
+import { addTodoPage } from '../store/slices/todos';
 import { addUserPage } from '../store/slices/users';
 
 export const dataHandling = (route, users, data) => {
@@ -40,6 +46,14 @@ export const dataHandling = (route, users, data) => {
         return {
             user,
             userInfo,
+        };
+    } else if (route === 'todos') {
+        const { title, completed, userId } = data;
+        const user = users.find((u) => u.id === userId)?.username;
+        return {
+            user,
+            title,
+            completed,
         };
     }
 };
@@ -82,5 +96,11 @@ export const request = {
         func: getUsers,
         users: false,
         dispatchFunc: addUserPage,
+    },
+    todos: {
+        perPage: 6,
+        func: getTodos,
+        users: true,
+        dispatchFunc: addTodoPage,
     },
 };

@@ -11,6 +11,7 @@ import { addAllUsers } from '../store/slices/users';
 import Route from './Route';
 import ImageCard from './ImageCard';
 import UserInfo from './UserInfo';
+import TodoInfo from './TodoInfo';
 
 const multipleColumns = (route, props) => {
     if (route === 'users') {
@@ -20,6 +21,18 @@ const multipleColumns = (route, props) => {
                 <ImageCard key={`${route}-1`} title={user} />,
                 <UserInfo key={`${route}-2`} userInfo={userInfo} column={1} />,
                 <UserInfo key={`${route}-3`} userInfo={userInfo} column={2} />,
+            ];
+        } else {
+            return [1, 1, 1];
+        }
+    }
+    if (route === 'todos') {
+        if (props) {
+            const { user, title, completed } = props;
+            return [
+                <ImageCard key={`${route}-1`} title={user} />,
+                <TodoInfo key={`${route}-2`} check={false} prop={title} />,
+                <TodoInfo key={`${route}-3`} check={true} prop={completed} />,
             ];
         } else {
             return [1, 1, 1];
@@ -156,7 +169,13 @@ const Table = ({ route }) => {
                 <>
                     <table
                         // border={1}
-                        width={multCol ? '70%' : '100%'}
+                        width={
+                            route === 'users'
+                                ? '70%'
+                                : route === 'todos'
+                                ? '50%'
+                                : '100%'
+                        }
                         style={{
                             // backgroundColor: 'yellow',
                             height: '580px',
@@ -164,6 +183,23 @@ const Table = ({ route }) => {
                             borderSpacing: '0 8px',
                         }}
                     >
+                        {route === 'todos' && (
+                            <thead>
+                                <tr>
+                                    <th
+                                        style={{
+                                            width: '140px',
+                                        }}
+                                    >
+                                        User
+                                    </th>
+                                    <th>Title</th>
+                                    <th style={{
+                                            width: '80px',
+                                        }}>Done</th>
+                                </tr>
+                            </thead>
+                        )}
                         <tbody>
                             {
                                 // !data.loading &&
@@ -224,7 +260,8 @@ const Table = ({ route }) => {
                                                         return (
                                                             <td
                                                                 style={{
-                                                                    height: '85px',
+                                                                    height: '85px'
+                                                                    // backgroundColor: 'yellow'
                                                                 }}
                                                                 key={index}
                                                             >
