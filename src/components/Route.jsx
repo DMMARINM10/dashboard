@@ -2,29 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Posts from './Posts';
 import Comments from './Comments';
-import Users from './Users';
 
-const Route = ({ route, user, title, body, footer, userInfo }) => {
+const Route = ({ route, user, title, body, footer }) => {
     const props = {
         user,
         title,
         body,
         footer,
-        userInfo,
     };
     let element;
     switch (route) {
         case 'posts':
-            element = <Posts {...props} />;
+            element = <Posts key={route} {...props} />;
             break;
         case 'comments':
-            element = <Comments {...props} />;
-            break;
-        case 'users':
-            element = <Users {...props} />;
+            element = <Comments key={route} {...props} />;
             break;
         default:
-            element = <Posts {...props} />;
+            element = <Posts key={route} {...props} />;
             break;
     }
 

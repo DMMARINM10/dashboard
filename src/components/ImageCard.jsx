@@ -17,7 +17,7 @@ const ImageCard = ({ title }) => {
                 alignItems: 'center',
                 textAlign: 'center',
                 backgroundColor: 'lightgray',
-                // height: '100%',
+                height: '100%',
                 // paddingBottom: '10px'
             }}
         >
@@ -75,7 +75,7 @@ const ImageCard = ({ title }) => {
 };
 
 ImageCard.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
 };
 
 export default ImageCard;

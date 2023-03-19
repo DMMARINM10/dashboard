@@ -9,6 +9,23 @@ import Loader from './Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { addAllUsers } from '../store/slices/users';
 import Route from './Route';
+import ImageCard from './ImageCard';
+import UserInfo from './UserInfo';
+
+const multipleColumns = (route, props) => {
+    if (route === 'users') {
+        if (props) {
+            const { user, userInfo } = props;
+            return [
+                <ImageCard key={`${route}-1`} title={user} />,
+                <UserInfo key={`${route}-2`} userInfo={userInfo} column={1} />,
+                <UserInfo key={`${route}-3`} userInfo={userInfo} column={2} />,
+            ];
+        } else {
+            return [1, 1, 1];
+        }
+    }
+};
 
 const Table = ({ route }) => {
     // recibe children y espacios vacios (rellenar) y encabezado TODO:
@@ -116,6 +133,21 @@ const Table = ({ route }) => {
         navigate(`/${route}?page=${page}`);
     };
 
+    const multCol = route === 'users' || route === 'todos';
+    const tableStyle = multCol
+        ? {
+              // border: '1px solid gray',
+              // marginBottom: '8px',
+              boxShadow: '1px 1px 4px 1px gray',
+              // backgroundColor: 'yellow',
+              // width: '70%',
+              borderRadius: '20px',
+              // display: 'flex',
+              // height: '80px',
+              // width: '80%'
+          }
+        : {};
+
     return (
         <>
             {data.loading ? (
@@ -123,10 +155,13 @@ const Table = ({ route }) => {
             ) : (
                 <>
                     <table
-                        width={'100%'}
+                        // border={1}
+                        width={multCol ? '70%' : '100%'}
                         style={{
                             // backgroundColor: 'yellow',
                             height: '580px',
+                            borderCollapse: 'separate',
+                            borderSpacing: '0 8px',
                         }}
                     >
                         <tbody>
@@ -140,19 +175,39 @@ const Table = ({ route }) => {
                                     );
                                     // console.log(props)
                                     return (
-                                        <tr key={index}>
-                                            <td
-                                                style={{
-                                                    // backgroundColor: 'yellow',
-                                                    display: 'flex',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <Route
-                                                    route={route}
-                                                    {...props}
-                                                />
-                                            </td>
+                                        <tr style={tableStyle} key={index}>
+                                            {multCol ? (
+                                                multipleColumns(
+                                                    route,
+                                                    props
+                                                ).map((element, index) => {
+                                                    return (
+                                                        <td
+                                                            style={{
+                                                                height: '85px',
+                                                            }}
+                                                            key={index}
+                                                        >
+                                                            {element}
+                                                        </td>
+                                                    );
+                                                })
+                                            ) : (
+                                                <td
+                                                    style={{
+                                                        // backgroundColor: 'yellow',
+                                                        display: 'flex',
+                                                        justifyContent:
+                                                            'center',
+                                                        // height: 'px',
+                                                    }}
+                                                >
+                                                    <Route
+                                                        route={route}
+                                                        {...props}
+                                                    />
+                                                </td>
+                                            )}
                                         </tr>
                                     );
                                 })
@@ -163,15 +218,33 @@ const Table = ({ route }) => {
                                     // console.log(props)
                                     return (
                                         <tr key={index}>
-                                            <td
-                                                style={{
-                                                    // backgroundColor: 'yellow',
-                                                    display: 'flex',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                {extra}
-                                            </td>
+                                            {multCol ? (
+                                                multipleColumns(route).map(
+                                                    (_, index) => {
+                                                        return (
+                                                            <td
+                                                                style={{
+                                                                    height: '85px',
+                                                                }}
+                                                                key={index}
+                                                            >
+                                                                {extra}
+                                                            </td>
+                                                        );
+                                                    }
+                                                )
+                                            ) : (
+                                                <td
+                                                    style={{
+                                                        // backgroundColor: 'yellow',
+                                                        display: 'flex',
+                                                        justifyContent:
+                                                            'center',
+                                                    }}
+                                                >
+                                                    {extra}
+                                                </td>
+                                            )}
                                         </tr>
                                     );
                                 })
@@ -194,6 +267,7 @@ const Table = ({ route }) => {
 
 Table.propTypes = {
     route: PropTypes.string.isRequired,
+    column: PropTypes.number,
 };
 
 export default Table;

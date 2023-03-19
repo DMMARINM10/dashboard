@@ -23,7 +23,7 @@ const TextCard = ({ title, body, footer }) => {
                     marginLeft: '10px',
                 }}
             >
-                {capitalizedWord(title)}
+                {capitalizedWord(title || '')}
             </h3>
             <span
                 style={{
@@ -31,7 +31,7 @@ const TextCard = ({ title, body, footer }) => {
                     textAlign: 'center',
                 }}
             >
-                {capitalizedWord(body)}
+                {capitalizedWord(body || '')}
             </span>
             <footer
                 style={{
@@ -47,8 +47,8 @@ const TextCard = ({ title, body, footer }) => {
 };
 
 TextCard.propTypes = {
-    title: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    body: PropTypes.string,
     footer: PropTypes.string,
 };
 

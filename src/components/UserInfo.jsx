@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const UserInfo = ({ userInfo }) => {
+const UserInfo = ({ userInfo, column }) => {
     const userKeys = Object.keys(userInfo);
     const { address, company } = userInfo;
-    const { name } = company;
-    const { street, suite, city } = address;
+    const name = company?.name;
+    const street = address?.street;
+    const suite = address?.suite;
+    const city = address?.city;
     const totalAddress = `${street}, ${suite}, ${city}`;
     const companyName = name;
     const newInfo = {
@@ -33,9 +35,10 @@ const UserInfo = ({ userInfo }) => {
                 }}
             >
                 {userKeys.map((key, index) => {
-                    if (index > 2) return;
+                    const exp =
+                        column === 1 ? index > column + 1 : index < column + 1;
+                    if (exp) return;
                     const value = newInfo[key];
-                    console.log(value);
                     return (
                         <li key={key}>
                             <span
@@ -50,7 +53,7 @@ const UserInfo = ({ userInfo }) => {
                     );
                 })}
             </ul>
-            <ul
+            {/* <ul
                 style={{
                     // backgroundColor: 'purple',
                     paddingLeft: '25px',
@@ -72,13 +75,14 @@ const UserInfo = ({ userInfo }) => {
                         </li>
                     );
                 })}
-            </ul>
+            </ul> */}
         </div>
     );
 };
 
 UserInfo.propTypes = {
     userInfo: PropTypes.object.isRequired,
+    column: PropTypes.number.isRequired,
 };
 
 export default UserInfo;

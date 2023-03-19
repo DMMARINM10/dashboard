@@ -9,6 +9,7 @@ const Comments = ({ title, body, footer }) => {
         body,
         footer,
     };
+    // console.log(props)
     return (
         <Container>
             <TextCard {...props} />
@@ -17,9 +18,9 @@ const Comments = ({ title, body, footer }) => {
 };
 
 Comments.propTypes = {
-    title: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired,
-    footer: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    body: PropTypes.string,
+    footer: PropTypes.string,
 };
 
 export default Comments;
