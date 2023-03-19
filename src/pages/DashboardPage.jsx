@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import Sidebar from '../components/Sidebar'
-import RightSide from '../components/RightSide'
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import Sidebar from '../components/Sidebar';
+import RightSide from '../components/RightSide';
 
 const DashboardPage = ({ route }) => {
     // useEffect(() => {
@@ -34,23 +34,25 @@ const DashboardPage = ({ route }) => {
     //       document.body.removeChild(greenball);
     //     }
     //   }, []);
-  return (
-    <main style={{
-        display: 'grid',
-        height: '100%',
-        // position: 'absolute',
-        // backgroundColor: 'green',
-        gridTemplateColumns: '240px 1fr',
-        gridTemplateRows: '1fr'
-    }}>
-        <Sidebar route={route}/>
-        <RightSide route={route} />
-    </main>
-  )
-}
+    return (
+        <main
+            style={{
+                display: 'grid',
+                height: '100%',
+                // position: 'absolute',
+                // backgroundColor: 'green',
+                gridTemplateColumns: '240px 1fr',
+                gridTemplateRows: '1fr',
+            }}
+        >
+            <Sidebar route={route} />
+            <RightSide route={route} />
+        </main>
+    );
+};
 
 DashboardPage.propTypes = {
-    route: PropTypes.string.isRequired
-}
+    route: PropTypes.string.isRequired,
+};
 
-export default DashboardPage
+export default DashboardPage;

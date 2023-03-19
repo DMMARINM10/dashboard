@@ -1,7 +1,7 @@
-import { addUsers } from './'
+import { addUsers } from './';
 
 export const addAllUsers = (payload) => {
-  return async (dispatch) => {
-    dispatch(addUsers(payload))
-  }
-}
+    return async (dispatch) => {
+        dispatch(addUsers(payload));
+    };
+};

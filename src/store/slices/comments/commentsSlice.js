@@ -1,16 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {}
+const initialState = {};
 
 export const commentsSlice = createSlice({
-  name: 'comments',
-  initialState,
-  reducers: {
-    addComments: (state, { payload }) => {
-      const { page, data } = payload
-      state[page] = data
-    }
-  }
-})
+    name: 'comments',
+    initialState,
+    reducers: {
+        addComments: (state, { payload }) => {
+            const { page, data } = payload;
+            state[page] = data;
+        },
+    },
+});
 
-export const { addComments } = commentsSlice.actions
+export const { addComments } = commentsSlice.actions;

@@ -1,2 +1,2 @@
-export * from './postsSlice'
-export * from './thunks'
+export * from './postsSlice';
+export * from './thunks';

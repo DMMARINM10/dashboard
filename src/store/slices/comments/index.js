@@ -1,2 +1,2 @@
-export * from './commentsSlice'
-export * from './thunks'
+export * from './commentsSlice';
+export * from './thunks';

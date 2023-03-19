@@ -4,5 +4,5 @@ export const pages = {
     albums: 100,
     photos: 5000,
     todos: 200,
-    users: 10
-}
+    users: 10,
+};

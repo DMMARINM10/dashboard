@@ -1,7 +1,7 @@
-import { addPosts } from './'
+import { addPosts } from './';
 
 export const addPostPage = (payload) => {
-  return async (dispatch) => {
-    dispatch(addPosts(payload))
-  }
-}
+    return async (dispatch) => {
+        dispatch(addPosts(payload));
+    };
+};
