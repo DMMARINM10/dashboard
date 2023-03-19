@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Container = ({ children }) => {
+const Container = ({ children, width = '80%' }) => {
     return (
         <div
             style={{
@@ -9,7 +9,7 @@ const Container = ({ children }) => {
                 marginBottom: '8px',
                 boxShadow: '1px 1px 4px 1px gray',
                 // backgroundColor: 'yellow',
-                width: '80%',
+                width,
                 borderRadius: '20px',
                 display: 'flex',
                 height: '85px',
@@ -23,6 +23,7 @@ const Container = ({ children }) => {
 
 Container.propTypes = {
     children: PropTypes.node.isRequired,
+    width: PropTypes.string,
 };
 
 export default Container;

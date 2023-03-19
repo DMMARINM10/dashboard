@@ -22,7 +22,7 @@ const AppRouter = () => {
                 <Route path="albums" element={<div>albums</div>} />
                 <Route path="photos" element={<div>photos</div>} />
                 <Route path="todos" element={<div>todos</div>} />
-                <Route path="users" element={<div>users</div>} />
+                <Route path="users" element={<DashboardPage route="users" />} />
                 <Route
                     path="*"
                     element={<Navigate to={'/posts'} replace={true} />}

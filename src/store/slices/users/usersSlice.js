@@ -11,7 +11,11 @@ export const usersSlice = createSlice({
         addUsers: (state, { payload }) => {
             state.users = payload;
         },
+        addPerPage: (state, { payload }) => {
+            const { page, data } = payload;
+            state[page] = data;
+        },
     },
 });
 
-export const { addUsers } = usersSlice.actions;
+export const { addUsers, addPerPage } = usersSlice.actions;

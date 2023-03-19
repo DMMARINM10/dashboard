@@ -43,7 +43,7 @@ const Table = ({ route }) => {
             ></div>
         );
         if (!dataLoaded[page]) {
-            func(6 * (page - 1), perPage).then((data) => {
+            func(perPage * (page - 1), perPage).then((data) => {
                 const payload = {
                     page,
                     data,
@@ -110,7 +110,7 @@ const Table = ({ route }) => {
                 );
             }
         }
-    }, [page]);
+    }, [page, route]);
 
     const handlePage = (_, page) => {
         navigate(`/${route}?page=${page}`);

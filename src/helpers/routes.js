@@ -1,11 +1,12 @@
-import { getComments, getPosts } from '../services/requests';
+import { getComments, getPosts, getUsers } from '../services/requests';
 import { addCommentPage } from '../store/slices/comments';
 import { addPostPage } from '../store/slices/posts';
+import { addUserPage } from '../store/slices/users';
 
 export const dataHandling = (route, users, data) => {
     if (route === 'posts') {
         const { userId, title, body } = data;
-        const user = users.find((u) => u.id === userId).username;
+        const user = users.find((u) => u.id === userId)?.username;
         return {
             user,
             title,
@@ -17,6 +18,28 @@ export const dataHandling = (route, users, data) => {
             title,
             body,
             footer,
+        };
+    } else if (route === 'users') {
+        const {
+            username: user,
+            name,
+            email,
+            address,
+            phone,
+            website,
+            company,
+        } = data;
+        const userInfo = {
+            name,
+            email,
+            address,
+            phone,
+            website,
+            company,
+        };
+        return {
+            user,
+            userInfo,
         };
     }
 };
@@ -53,5 +76,11 @@ export const request = {
         func: getComments,
         users: false,
         dispatchFunc: addCommentPage,
+    },
+    users: {
+        perPage: 6,
+        func: getUsers,
+        users: false,
+        dispatchFunc: addUserPage,
     },
 };
