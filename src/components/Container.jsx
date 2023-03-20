@@ -16,7 +16,7 @@ const Container = ({ children, width = '80%' }) => {
                 // width: '80%'
             }}
         >
-            {children || ''}
+            {children || <></>}
         </div>
     );
 };

@@ -7,7 +7,7 @@ import { capitalizedText } from '../helpers/textUtils';
 
 const RightSide = ({ route }) => {
     // const element = routes.find((r) => r.route === route).component
-
+    // const card = route === 'albums' || route === 'photos'
     return (
         <section
             style={{

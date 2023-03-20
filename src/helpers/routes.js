@@ -1,10 +1,14 @@
 import {
+    getAlbums,
     getComments,
+    getPhotos,
     getPosts,
     getTodos,
     getUsers,
 } from '../services/requests';
+import { addAlbumPage } from '../store/slices/albums';
 import { addCommentPage } from '../store/slices/comments';
+import { addPhotoPage } from '../store/slices/photos';
 import { addPostPage } from '../store/slices/posts';
 import { addTodoPage } from '../store/slices/todos';
 import { addUserPage } from '../store/slices/users';
@@ -55,6 +59,20 @@ export const dataHandling = (route, users, data) => {
             title,
             completed,
         };
+    } else if (route === 'albums') {
+        const { userId, title } = data;
+        const user = users.find((u) => u.id === userId)?.username;
+        return {
+            user,
+            title,
+        };
+    } else if (route === 'photos') {
+        const { thumbnailUrl: url, title } = data;
+        // console.log(url)
+        return {
+            url,
+            title,
+        };
     }
 };
 
@@ -102,5 +120,17 @@ export const request = {
         func: getTodos,
         users: true,
         dispatchFunc: addTodoPage,
+    },
+    albums: {
+        perPage: 12,
+        func: getAlbums,
+        users: true,
+        dispatchFunc: addAlbumPage,
+    },
+    photos: {
+        perPage: 12,
+        func: getPhotos,
+        users: false,
+        dispatchFunc: addPhotoPage,
     },
 };

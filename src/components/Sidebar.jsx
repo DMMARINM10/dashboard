@@ -8,8 +8,6 @@ import GroupIcon from '@mui/icons-material/Group';
 import AllInboxIcon from '@mui/icons-material/AllInbox';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import PropTypes from 'prop-types';
-// import { route } from '../data/routes'
-// import Posts from './Posts';
 import { useNavigate } from 'react-router-dom';
 import { capitalizedWord } from '../helpers/textUtils';
 
@@ -53,7 +51,8 @@ const useStyles = {
         display: 'flex',
         // position: 'absolute',
         flexDirection: 'column',
-        justifyContent: 'center',
+        paddingTop: '30%',
+        // justifyContent: 'center',
         pointerEvents: 'all',
         // gridColumn: '1 / 2',
         // gridRow: '1'

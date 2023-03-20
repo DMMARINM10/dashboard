@@ -12,13 +12,14 @@ import Route from './Route';
 import ImageCard from './ImageCard';
 import UserInfo from './UserInfo';
 import TodoInfo from './TodoInfo';
+import GridContainer from './GridContainer';
 
 const multipleColumns = (route, props) => {
     if (route === 'users') {
         if (props) {
             const { user, userInfo } = props;
             return [
-                <ImageCard key={`${route}-1`} title={user} />,
+                <ImageCard key={`${route}-1`} title={user} route="users" />,
                 <UserInfo key={`${route}-2`} userInfo={userInfo} column={1} />,
                 <UserInfo key={`${route}-3`} userInfo={userInfo} column={2} />,
             ];
@@ -30,7 +31,7 @@ const multipleColumns = (route, props) => {
         if (props) {
             const { user, title, completed } = props;
             return [
-                <ImageCard key={`${route}-1`} title={user} />,
+                <ImageCard key={`${route}-1`} title={user} route="todos" />,
                 <TodoInfo key={`${route}-2`} check={false} prop={title} />,
                 <TodoInfo key={`${route}-3`} check={true} prop={completed} />,
             ];
@@ -41,7 +42,6 @@ const multipleColumns = (route, props) => {
 };
 
 const Table = ({ route }) => {
-    // recibe children y espacios vacios (rellenar) y encabezado TODO:
     const dispatch = useDispatch();
     const dataLoaded = useSelector((state) => state[route]);
     const { users: usersLoaded } = useSelector((state) => state.users);
@@ -147,6 +147,7 @@ const Table = ({ route }) => {
     };
 
     const multCol = route === 'users' || route === 'todos';
+    const grid = route === 'albums' || route === 'photos';
     const tableStyle = multCol
         ? {
               // border: '1px solid gray',
@@ -167,127 +168,136 @@ const Table = ({ route }) => {
                 <Loader />
             ) : (
                 <>
-                    <table
-                        // border={1}
-                        width={
-                            route === 'users'
-                                ? '70%'
-                                : route === 'todos'
-                                ? '50%'
-                                : '100%'
-                        }
-                        style={{
-                            // backgroundColor: 'yellow',
-                            height: '580px',
-                            borderCollapse: 'separate',
-                            borderSpacing: '0 8px',
-                        }}
-                    >
-                        {route === 'todos' && (
-                            <thead>
-                                <tr>
-                                    <th
-                                        style={{
-                                            width: '140px',
-                                        }}
-                                    >
-                                        User
-                                    </th>
-                                    <th>Title</th>
-                                    <th style={{
-                                            width: '80px',
-                                        }}>Done</th>
-                                </tr>
-                            </thead>
-                        )}
-                        <tbody>
-                            {
-                                // !data.loading &&
-                                data.data.map((element, index) => {
-                                    const props = dataHandling(
-                                        route,
-                                        data.users,
-                                        element
-                                    );
-                                    // console.log(props)
-                                    return (
-                                        <tr style={tableStyle} key={index}>
-                                            {multCol ? (
-                                                multipleColumns(
-                                                    route,
-                                                    props
-                                                ).map((element, index) => {
-                                                    return (
-                                                        <td
-                                                            style={{
-                                                                height: '85px',
-                                                            }}
-                                                            key={index}
-                                                        >
-                                                            {element}
-                                                        </td>
-                                                    );
-                                                })
-                                            ) : (
-                                                <td
-                                                    style={{
-                                                        // backgroundColor: 'yellow',
-                                                        display: 'flex',
-                                                        justifyContent:
-                                                            'center',
-                                                        // height: 'px',
-                                                    }}
-                                                >
-                                                    <Route
-                                                        route={route}
-                                                        {...props}
-                                                    />
-                                                </td>
-                                            )}
-                                        </tr>
-                                    );
-                                })
+                    {grid ? (
+                        <GridContainer data={data} route={route} />
+                    ) : (
+                        <table
+                            // border={1}
+                            width={
+                                route === 'users'
+                                    ? '70%'
+                                    : route === 'todos'
+                                    ? '50%'
+                                    : '100%'
                             }
-                            {
-                                // !data.loading &&
-                                emptyRows.map((extra, index) => {
-                                    // console.log(props)
-                                    return (
-                                        <tr key={index}>
-                                            {multCol ? (
-                                                multipleColumns(route).map(
-                                                    (_, index) => {
+                            style={{
+                                // backgroundColor: 'yellow',
+                                height: '580px',
+                                borderCollapse: 'separate',
+                                borderSpacing: '0 8px',
+                                // overflow: 'hidden'
+                            }}
+                        >
+                            {route === 'todos' && (
+                                <thead>
+                                    <tr>
+                                        <th
+                                            style={{
+                                                width: '140px',
+                                            }}
+                                        >
+                                            User
+                                        </th>
+                                        <th>Title</th>
+                                        <th
+                                            style={{
+                                                width: '80px',
+                                            }}
+                                        >
+                                            Done
+                                        </th>
+                                    </tr>
+                                </thead>
+                            )}
+                            <tbody>
+                                {
+                                    // !data.loading &&
+                                    data.data.map((element, index) => {
+                                        const props = dataHandling(
+                                            route,
+                                            data.users,
+                                            element
+                                        );
+                                        // console.log(props)
+                                        return (
+                                            <tr style={tableStyle} key={index}>
+                                                {multCol ? (
+                                                    multipleColumns(
+                                                        route,
+                                                        props
+                                                    ).map((element, index) => {
                                                         return (
                                                             <td
                                                                 style={{
-                                                                    height: '85px'
-                                                                    // backgroundColor: 'yellow'
+                                                                    height: '85px',
                                                                 }}
                                                                 key={index}
                                                             >
-                                                                {extra}
+                                                                {element}
                                                             </td>
                                                         );
-                                                    }
-                                                )
-                                            ) : (
-                                                <td
-                                                    style={{
-                                                        // backgroundColor: 'yellow',
-                                                        display: 'flex',
-                                                        justifyContent:
-                                                            'center',
-                                                    }}
-                                                >
-                                                    {extra}
-                                                </td>
-                                            )}
-                                        </tr>
-                                    );
-                                })
-                            }
-                        </tbody>
-                    </table>
+                                                    })
+                                                ) : (
+                                                    <td
+                                                        style={{
+                                                            // backgroundColor: 'yellow',
+                                                            display: 'flex',
+                                                            justifyContent:
+                                                                'center',
+                                                            // height: 'px',
+                                                        }}
+                                                    >
+                                                        <Route
+                                                            route={route}
+                                                            {...props}
+                                                        />
+                                                    </td>
+                                                )}
+                                            </tr>
+                                        );
+                                    })
+                                }
+                                {
+                                    // !data.loading &&
+                                    emptyRows.map((extra, index) => {
+                                        // console.log(props)
+                                        return (
+                                            <tr key={index}>
+                                                {multCol ? (
+                                                    multipleColumns(route).map(
+                                                        (_, index) => {
+                                                            return (
+                                                                <td
+                                                                    style={{
+                                                                        height: '85px',
+                                                                        // backgroundColor: 'yellow'
+                                                                    }}
+                                                                    key={index}
+                                                                >
+                                                                    {extra}
+                                                                </td>
+                                                            );
+                                                        }
+                                                    )
+                                                ) : (
+                                                    <td
+                                                        style={{
+                                                            // backgroundColor: 'yellow',
+                                                            display: 'flex',
+                                                            justifyContent:
+                                                                'center',
+                                                        }}
+                                                    >
+                                                        {extra}
+                                                    </td>
+                                                )}
+                                            </tr>
+                                        );
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    )}
                     <Stack spacing={2}>
                         <Pagination
                             count={totalPages}

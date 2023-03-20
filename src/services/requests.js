@@ -44,3 +44,11 @@ export const getComments = (start, limit) => {
 export const getTodos = (start, limit) => {
     return httpRequest('todos', start, limit);
 };
+
+export const getAlbums = (start, limit) => {
+    return httpRequest('albums', start, limit);
+};
+
+export const getPhotos = (start, limit) => {
+    return httpRequest('photos', start, limit);
+};

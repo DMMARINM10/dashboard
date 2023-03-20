@@ -11,7 +11,7 @@ const Posts = ({ user, title, body }) => {
     };
     return (
         <Container>
-            <ImageCard title={user} />
+            <ImageCard title={user} route="posts" />
             <TextCard {...props} />
         </Container>
     );

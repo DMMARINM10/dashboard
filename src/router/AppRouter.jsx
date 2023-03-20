@@ -19,8 +19,14 @@ const AppRouter = () => {
                     path="comments"
                     element={<DashboardPage route="comments" />}
                 />
-                <Route path="albums" element={<div>albums</div>} />
-                <Route path="photos" element={<div>photos</div>} />
+                <Route
+                    path="albums"
+                    element={<DashboardPage route="albums" />}
+                />
+                <Route
+                    path="photos"
+                    element={<DashboardPage route="photos" />}
+                />
                 <Route path="todos" element={<DashboardPage route="todos" />} />
                 <Route path="users" element={<DashboardPage route="users" />} />
                 <Route
