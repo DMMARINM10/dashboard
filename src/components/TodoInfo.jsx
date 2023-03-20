@@ -5,39 +5,17 @@ import { capitalizedWord } from '../helpers/textUtils';
 
 const TodoInfo = ({ prop, check }) => {
     return check ? (
-        <div
-            style={{
-                // backgroundColor: 'blue',
-                width: '80px',
-                display: 'flex',
-                justifyContent: 'center',
-            }}
-        >
+        <div className="todo-info_check-container">
             <div
                 style={{
                     backgroundColor: prop ? 'black' : 'white',
-                    width: '25px',
-                    height: '25px',
-                    border: '1px solid black',
-                    borderRadius: '10px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
                 }}
             >
                 <CheckIcon sx={{ fontSize: '18px', color: 'white' }} />
             </div>
         </div>
     ) : (
-        <div
-            style={{
-                // backgroundColor: 'red',
-                // width: '80%',
-                textAlign: 'center',
-                marginLeft: '1%',
-                // height: '100%'
-            }}
-        >
+        <div className="todo-info_text">
             <h4>{capitalizedWord(prop || '')}</h4>
         </div>
     );

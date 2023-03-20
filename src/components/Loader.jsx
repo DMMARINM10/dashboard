@@ -3,14 +3,7 @@ import ReactLoading from 'react-loading';
 
 const Loader = () => {
     return (
-        <div
-            style={{
-                height: '630px',
-                display: 'flex',
-                alignItems: 'center',
-                paddingBottom: '100px',
-            }}
-        >
+        <div className="loader">
             <ReactLoading
                 type={'bars'}
                 color={'black'}

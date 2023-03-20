@@ -43,166 +43,59 @@ const SignUpForm = () => {
                 }}
             >
                 {({ isSubmitting }) => (
-                    <Form
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            // backgroundColor: 'yellow',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            padding: '20px',
-                            height: '100%',
-                        }}
-                    >
-                        <div
-                            style={{
-                                border: '2px solid gray',
-                                padding: '8px',
-                                borderRadius: '5px',
-                                width: '100%',
-                            }}
-                        >
+                    <Form className="sign_form">
+                        <div className="sign_input-container">
                             <Field
-                                style={{
-                                    outline: 'none',
-                                    color: 'gray',
-                                    width: '100%',
-                                    border: 'none',
-                                    // padding: '8px'
-                                }}
+                                className="sign_input"
                                 name="email"
                                 type="email"
                                 placeholder="Email"
                             />
                         </div>
-                        <div
-                            style={{
-                                height: '30px',
-                                width: '100%',
-                                // backgroundColor: 'purple'
-                            }}
-                        >
+                        <div className="sign_error-container">
                             <ErrorMessage
-                                style={{
-                                    color: 'red',
-                                    fontSize: '14px',
-                                }}
+                                className="sign_error"
                                 name="email"
                                 component="div"
                             />
                         </div>
-                        <div
-                            style={{
-                                border: '2px solid gray',
-                                padding: '8px',
-                                borderRadius: '5px',
-                                width: '100%',
-                            }}
-                        >
+                        <div className="sign_input-container">
                             <Field
-                                style={{
-                                    outline: 'none',
-                                    color: 'gray',
-                                    border: 'none',
-                                    width: '100%',
-                                    // padding: '8px'
-                                }}
+                                className="sign_input"
                                 name="password"
                                 type="password"
                                 placeholder="Password"
                             />
                         </div>
-                        <div
-                            style={{
-                                height: '30px',
-                                width: '100%',
-                                // backgroundColor: 'purple'
-                            }}
-                        >
+                        <div className="sign_error-container">
                             <ErrorMessage
-                                style={{
-                                    color: 'red',
-                                    fontSize: '14px',
-                                    // backgroundColor: 'blue'
-                                }}
+                                className="sign_error"
                                 name="password"
                                 component="div"
                             />
                         </div>
-                        <div
-                            style={{
-                                border: '2px solid gray',
-                                padding: '8px',
-                                borderRadius: '5px',
-                                width: '100%',
-                            }}
-                        >
+                        <div className="sign_input-container">
                             <Field
-                                style={{
-                                    outline: 'none',
-                                    color: 'gray',
-                                    border: 'none',
-                                    width: '100%',
-                                    // padding: '8px'
-                                }}
+                                className="sign_input"
                                 name="confirmPassword"
                                 type="password"
                                 placeholder="Confirm password"
                             />
                         </div>
-                        <div
-                            style={{
-                                height: '30px',
-                                width: '100%',
-                                // backgroundColor: 'purple'
-                            }}
-                        >
+                        <div className="sign_error-container">
                             <ErrorMessage
-                                style={{
-                                    color: 'red',
-                                    fontSize: '14px',
-                                    // backgroundColor: 'blue'
-                                }}
+                                className="sign_error"
                                 name="confirmPassword"
                                 component="div"
                             />
                         </div>
-                        <div
-                            style={{
-                                height: '30px',
-                                width: '100%',
-                                color: 'red',
-                                fontSize: '14px',
-                                // backgroundColor: 'purple'
-                            }}
-                        >
+                        <div className="sign_extra-error">
                             {error && <span>Passwords must match</span>}
                         </div>
-                        <button
-                            style={{
-                                color: 'white',
-                                backgroundColor: 'gray', //hover black y lightgray disabled
-                                border: 'none',
-                                width: '100px',
-                                padding: '8px',
-                                borderRadius: '6px',
-                                cursor: 'pointer',
-                            }}
-                            type="submit"
-                            disabled={isSubmitting}
-                        >
+                        <button type="submit" disabled={isSubmitting}>
                             Submit
                         </button>
-                        <span
-                            style={{
-                                marginTop: '10px',
-                                width: '100%',
-                                textAlign: 'end',
-                                // backgroundColor: 'red'
-                            }}
-                        >
-                            <a href="/auth/login">Login</a>
-                        </span>
+                        <a href="/auth/login">Login</a>
                     </Form>
                 )}
             </Formik>

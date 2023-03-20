@@ -1,0 +1,67 @@
+.sign {
+    &_form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        height: 100%;
+    }
+
+    &_input-container {
+        border: 2px solid $medium-color;
+        padding: 8px;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    &_input {
+        outline: none;
+        color: $medium-color;
+        width: 100%;
+        border: none;
+    }
+
+    &_error-container {
+        height: 30px;
+        width: 100%;
+    }
+
+    &_error {
+        color: red;
+        font-size: 14px;
+    }
+
+    &_extra-error {
+        height: 30px;
+        width: 100%;
+        color: red;
+        font-size: 12px;
+    }
+}
+
+//                         <div className=sign_extra-error
+//                             style={{
+//                             }}
+//                         >
+//                             {error.status && <span>{error.msg}</span>}
+//                         </div>
+//                         <button
+//                             style={{
+//                                 color: white;
+//                                 backgroundColor: gray; //hover black y lightgray disabled
+//                                 border: none;
+//                                 width: 100px;
+//                                 padding: 8px;
+//                                 borderRadius: 6px;
+//                                 cursor: pointer;
+//                             }}
+//                             type="submit"
+//                             disabled={isSubmitting}
+//                         >
+//                             Submit
+//                         </button>
+//                             <a style={{
+//                                 marginTop: 10px;
+//                                 width: 100%;
+//                                 textAlign: end;

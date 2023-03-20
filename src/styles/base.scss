@@ -1,3 +1,7 @@
+$dark-color: black;
+$medium-color: gray;
+$light-color: lightgray;
+
 * {
     padding: 0;
     margin: 0;
@@ -10,41 +14,27 @@ body,
     font-family: 'Cardo', 'Poppins', sans-serif;
     height: 100%;
     width: 100%;
+    min-width: 1140px;
 }
 
-/* Balls */
-#redball,
-#greenball,
-#blueball {
-    position: absolute;
-    height: 30px;
-    width: 30px;
-    border-radius: 50px;
+table {
+    height: 580px;
+    border-collapse: separate;
+    border-spacing: 0 8px;
 }
-#redball {
-    background: radial-gradient(
-        50% 50%,
-        rgba(255, 128, 128, 1),
-        rgba(255, 64, 64, 1) 60%,
-        rgba(255, 0, 0, 1) 95%,
-        rgba(255, 255, 255, 0)
-    );
+
+button {
+    color: white;
+    background-color: $medium-color;
+    border: none;
+    width: 100px;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
 }
-#greenball {
-    background: radial-gradient(
-        50% 50%,
-        rgba(128, 255, 128, 1),
-        rgba(64, 255, 64, 1) 60%,
-        rgba(0, 255, 0, 1) 95%,
-        rgba(255, 255, 255, 0)
-    );
-}
-#blueball {
-    background: radial-gradient(
-        50% 50%,
-        rgba(128, 128, 255, 1),
-        rgba(64, 64, 255, 1) 60%,
-        rgba(0, 0, 255, 1) 95%,
-        rgba(255, 255, 255, 0)
-    );
+
+a {
+    margin-top: 10px;
+    width: 100%;
+    text-align: end;
 }

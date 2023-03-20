@@ -1,0 +1,25 @@
+.text-card {
+    &_container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 0px 8px;
+
+        h3 {
+            margin: 0;
+            margin-left: 10px;
+        }
+
+        span {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        footer {
+            font-size: 13px;
+            padding-right: 5px;
+            text-align: end;
+        }
+    }
+}

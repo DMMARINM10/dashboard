@@ -1,0 +1,22 @@
+.todo-info {
+    &_check-container {
+        width: 80px;
+        display: flex;
+        justify-content: center;
+
+        div {
+            width: 25px;
+            height: 25px;
+            border: 1px solid black;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &_text {
+        text-align: center;
+        margin-left: 1%;
+    }
+}

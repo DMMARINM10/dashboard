@@ -6,47 +6,18 @@ import { dataHandling } from '../helpers/routes';
 const GridContainer = ({ data, route }) => {
     const dataFinal = data?.data;
     return (
-        <section
-            style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '580px',
-                overflow: 'hidden',
-                // backgroundColor: 'green'
-            }}
-        >
-            <div
-                style={{
-                    display: 'grid',
-                    // padding: '5px',
-                    width: '70%',
-                    // border: '1px solid black',
-                    gridTemplateColumns: 'repeat(4, 25%)',
-                    gridTemplateRows: 'repeat(3, 160px)',
-                }}
-            >
+        <section className="grid-container_section">
+            <div className="grid-container_grid">
                 {dataFinal.map((element, index) => {
                     const props = dataHandling(route, data.users, element);
-                    // console.log(props)
                     // eslint-disable-next-line react/prop-types
                     const user = props?.user;
                     // eslint-disable-next-line react/prop-types
                     const title = props?.title;
                     // eslint-disable-next-line react/prop-types
                     const url = props?.url;
-                    // console.log(url)
                     return (
-                        <div
-                            key={index}
-                            style={{
-                                // backgroundColor: 'red',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                padding: '5px 0',
-                            }}
-                        >
+                        <div className="grid-container_cell" key={index}>
                             <ImageCard
                                 title={user}
                                 route={route}

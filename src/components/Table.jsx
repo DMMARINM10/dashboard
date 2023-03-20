@@ -65,25 +65,37 @@ const Table = ({ route }) => {
         ) {
             navigate(`/${route}?page=1`);
         }
-        const element = (
-            <div
-                style={{
-                    height: '93px',
-                }}
-            ></div>
-        );
+        const element = <div className="table_empty-element"></div>;
         if (!dataLoaded[page]) {
-            func(perPage * (page - 1), perPage).then((data) => {
-                const payload = {
-                    page,
-                    data,
-                };
-                if (users) {
-                    getUsers(0, 10).then((users) => {
+            func(perPage * (page - 1), perPage)
+                .then((data) => {
+                    const payload = {
+                        page,
+                        data,
+                    };
+                    if (users) {
+                        getUsers(0, 10)
+                            .then((users) => {
+                                dispatch(dispatchFunc(payload));
+                                dispatch(addAllUsers(users));
+                                setData({
+                                    users,
+                                    data,
+                                    loading: false,
+                                });
+                                extraValues(
+                                    data,
+                                    perPage,
+                                    setEmptyRows,
+                                    emptyRows,
+                                    element
+                                );
+                            })
+                            .catch((e) => console.log(e));
+                    } else {
                         dispatch(dispatchFunc(payload));
-                        dispatch(addAllUsers(users));
                         setData({
-                            users,
+                            users: [],
                             data,
                             loading: false,
                         });
@@ -94,23 +106,9 @@ const Table = ({ route }) => {
                             emptyRows,
                             element
                         );
-                    });
-                } else {
-                    dispatch(dispatchFunc(payload));
-                    setData({
-                        users: [],
-                        data,
-                        loading: false,
-                    });
-                    extraValues(
-                        data,
-                        perPage,
-                        setEmptyRows,
-                        emptyRows,
-                        element
-                    );
-                }
-            });
+                    }
+                })
+                .catch((e) => console.log(e));
         } else {
             if (users) {
                 setData({
@@ -150,15 +148,8 @@ const Table = ({ route }) => {
     const grid = route === 'albums' || route === 'photos';
     const tableStyle = multCol
         ? {
-              // border: '1px solid gray',
-              // marginBottom: '8px',
               boxShadow: '1px 1px 4px 1px gray',
-              // backgroundColor: 'yellow',
-              // width: '70%',
               borderRadius: '20px',
-              // display: 'flex',
-              // height: '80px',
-              // width: '80%'
           }
         : {};
 
@@ -172,129 +163,81 @@ const Table = ({ route }) => {
                         <GridContainer data={data} route={route} />
                     ) : (
                         <table
-                            // border={1}
                             width={
                                 route === 'users'
-                                    ? '70%'
+                                    ? '80%'
                                     : route === 'todos'
                                     ? '50%'
                                     : '100%'
                             }
-                            style={{
-                                // backgroundColor: 'yellow',
-                                height: '580px',
-                                borderCollapse: 'separate',
-                                borderSpacing: '0 8px',
-                                // overflow: 'hidden'
-                            }}
                         >
                             {route === 'todos' && (
                                 <thead>
-                                    <tr>
-                                        <th
-                                            style={{
-                                                width: '140px',
-                                            }}
-                                        >
-                                            User
-                                        </th>
+                                    <tr className="table_head">
+                                        <th>User</th>
                                         <th>Title</th>
-                                        <th
-                                            style={{
-                                                width: '80px',
-                                            }}
-                                        >
-                                            Done
-                                        </th>
+                                        <th>Done</th>
                                     </tr>
                                 </thead>
                             )}
                             <tbody>
-                                {
-                                    // !data.loading &&
-                                    data.data.map((element, index) => {
-                                        const props = dataHandling(
-                                            route,
-                                            data.users,
-                                            element
-                                        );
-                                        // console.log(props)
-                                        return (
-                                            <tr style={tableStyle} key={index}>
-                                                {multCol ? (
-                                                    multipleColumns(
-                                                        route,
-                                                        props
-                                                    ).map((element, index) => {
+                                {data.data.map((element, index) => {
+                                    const props = dataHandling(
+                                        route,
+                                        data.users,
+                                        element
+                                    );
+                                    return (
+                                        <tr style={tableStyle} key={index}>
+                                            {multCol ? (
+                                                multipleColumns(
+                                                    route,
+                                                    props
+                                                ).map((element, index) => {
+                                                    return (
+                                                        <td
+                                                            className="table_mult-td"
+                                                            key={index}
+                                                        >
+                                                            {element}
+                                                        </td>
+                                                    );
+                                                })
+                                            ) : (
+                                                <td className="table_one-td">
+                                                    <Route
+                                                        route={route}
+                                                        {...props}
+                                                    />
+                                                </td>
+                                            )}
+                                        </tr>
+                                    );
+                                })}
+                                {emptyRows.map((extra, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            {multCol ? (
+                                                multipleColumns(route).map(
+                                                    (_, index) => {
                                                         return (
                                                             <td
-                                                                style={{
-                                                                    height: '85px',
-                                                                }}
+                                                                className="table_mult-td"
                                                                 key={index}
                                                             >
-                                                                {element}
+                                                                {extra}
                                                             </td>
                                                         );
-                                                    })
-                                                ) : (
-                                                    <td
-                                                        style={{
-                                                            // backgroundColor: 'yellow',
-                                                            display: 'flex',
-                                                            justifyContent:
-                                                                'center',
-                                                            // height: 'px',
-                                                        }}
-                                                    >
-                                                        <Route
-                                                            route={route}
-                                                            {...props}
-                                                        />
-                                                    </td>
-                                                )}
-                                            </tr>
-                                        );
-                                    })
-                                }
-                                {
-                                    // !data.loading &&
-                                    emptyRows.map((extra, index) => {
-                                        // console.log(props)
-                                        return (
-                                            <tr key={index}>
-                                                {multCol ? (
-                                                    multipleColumns(route).map(
-                                                        (_, index) => {
-                                                            return (
-                                                                <td
-                                                                    style={{
-                                                                        height: '85px',
-                                                                        // backgroundColor: 'yellow'
-                                                                    }}
-                                                                    key={index}
-                                                                >
-                                                                    {extra}
-                                                                </td>
-                                                            );
-                                                        }
-                                                    )
-                                                ) : (
-                                                    <td
-                                                        style={{
-                                                            // backgroundColor: 'yellow',
-                                                            display: 'flex',
-                                                            justifyContent:
-                                                                'center',
-                                                        }}
-                                                    >
-                                                        {extra}
-                                                    </td>
-                                                )}
-                                            </tr>
-                                        );
-                                    })
-                                }
+                                                    }
+                                                )
+                                            ) : (
+                                                <td className="table_one-td">
+                                                    {extra}
+                                                </td>
+                                            )}
+                                        </tr>
+                                    );
+                                })}
                             </tbody>
                         </table>
                     )}

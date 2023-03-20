@@ -46,29 +46,7 @@ export const routes = [
     },
 ];
 
-const useStyles = {
-    menuSliderContainer: {
-        width: 240,
-        background: 'linear-gradient(black, gray)',
-        // color: 'black',
-        height: '100%',
-        display: 'flex',
-        // position: 'absolute',
-        flexDirection: 'column',
-        paddingTop: '30%',
-        // justifyContent: 'center',
-        pointerEvents: 'all',
-        // gridColumn: '1 / 2',
-        // gridRow: '1'
-        // position: 'relative'
-    },
-    listItem: {
-        color: 'black',
-    },
-};
-
 const Sidebar = ({ route }) => {
-    const classes = useStyles;
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleClick = (routeSidebar) => {
@@ -89,35 +67,13 @@ const Sidebar = ({ route }) => {
     };
 
     const sideList = () => (
-        <nav style={classes.menuSliderContainer}>
-            <ul
-                style={{
-                    // backgroundColor: 'red',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '40px',
-                    padding: '0',
-                }}
-            >
+        <nav className="sidebar_container">
+            <ul>
                 {routes.map((listItem, index) => (
                     <li
                         key={index}
                         onClick={() => handleClick(listItem.route)}
-                        style={{
-                            backgroundColor: 'white', //light gray hover and white selected
-                            borderRadius: '10px',
-                            // margin: '0px 5px',
-                            display: 'flex',
-                            // justifyContent: 'flex-end',
-                            // border: '1px solid blue',
-                            alignItems: 'center',
-                            padding: '5px 5px 5px 10px',
-                            // paddingLeft: '10px',
-                            width: '70%',
-                            cursor: 'pointer',
-                            // color: 'black'
-                        }}
+                        className="sidebar_item"
                     >
                         <ListItemIcon>{listItem.icon}</ListItemIcon>
                         <ListItemText
@@ -125,18 +81,7 @@ const Sidebar = ({ route }) => {
                         />
                     </li>
                 ))}
-                <li
-                    onClick={logOut}
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        padding: '5px 5px 5px 10px',
-                        // paddingLeft: '10px',
-                        gap: '10px',
-                        cursor: 'pointer',
-                        color: 'white',
-                    }}
-                >
+                <li onClick={logOut} className="sidebar_logout">
                     <PowerSettingsNewIcon />
                     <ListItemText primary="Log out" />
                 </li>

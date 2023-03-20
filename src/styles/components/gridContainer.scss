@@ -1,0 +1,23 @@
+.grid-container {
+    &_section {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 580px;
+        overflow: hidden;
+    }
+
+    &_grid {
+        display: grid;
+        width: 70%;
+        grid-template-columns: repeat(4, 25%);
+        grid-template-rows: repeat(3, 160px);
+    }
+
+    &_cell {
+        display: flex;
+        justify-content: center;
+        padding: 5px 0;
+    }
+}

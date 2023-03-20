@@ -9,7 +9,6 @@ const Comments = ({ title, body, footer }) => {
         body,
         footer,
     };
-    // console.log(props)
     return (
         <Container>
             <TextCard {...props} />

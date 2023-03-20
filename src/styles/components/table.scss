@@ -1,0 +1,22 @@
+.table {
+    &_empty-element {
+        height: 93px;
+    }
+
+    &_head th:nth-child(1) {
+        width: 140px;
+    }
+
+    &_head th:nth-child(3) {
+        width: 80px;
+    }
+
+    &_mult-td {
+        height: 85px;
+    }
+
+    &_one-td {
+        display: flex;
+        justify-content: center;
+    }
+}
