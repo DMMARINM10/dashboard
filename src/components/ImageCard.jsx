@@ -6,7 +6,6 @@ import { capitalizedWord } from '../helpers/textUtils';
 
 const ImageCard = ({ title, route, subTitle, url }) => {
     const card = route === 'albums' || route === 'photos';
-    console.log(title);
     const borderRadius = card ? '20px' : '20px 0 0 20px';
     return (
         <Card
@@ -29,12 +28,6 @@ const ImageCard = ({ title, route, subTitle, url }) => {
                 // paddingBottom: '10px'
             }}
         >
-            {/* <CardMedia
-        component="img"
-        alt={title}
-        height="50"
-        image={url}
-      /> */}
             <div
                 style={{
                     // backgroundColor: 'blue',

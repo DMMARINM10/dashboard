@@ -68,7 +68,6 @@ export const dataHandling = (route, users, data) => {
         };
     } else if (route === 'photos') {
         const { thumbnailUrl: url, title } = data;
-        // console.log(url)
         return {
             url,
             title,

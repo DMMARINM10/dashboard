@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { albumsSlice } from './slices/albums';
+import { authSlice } from './slices/auth';
 import { commentsSlice } from './slices/comments';
 import { photosSlice } from './slices/photos';
 import { postsSlice } from './slices/posts';
@@ -14,5 +15,6 @@ export const store = configureStore({
         todos: todosSlice.reducer,
         albums: albumsSlice.reducer,
         photos: photosSlice.reducer,
+        auth: authSlice.reducer,
     },
 });

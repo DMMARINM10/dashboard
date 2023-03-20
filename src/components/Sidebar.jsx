@@ -10,6 +10,10 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { capitalizedWord } from '../helpers/textUtils';
+import { auth } from '../firebase';
+import { signOut } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../store/slices/auth';
 
 const iconColor = {
     color: 'black',
@@ -66,8 +70,22 @@ const useStyles = {
 const Sidebar = ({ route }) => {
     const classes = useStyles;
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const handleClick = (routeSidebar) => {
         if (route !== routeSidebar) navigate(`/${routeSidebar}?page=1`);
+    };
+    const logOut = () => {
+        signOut(auth)
+            .then(() => {
+                dispatch(logoutUser());
+                localStorage.removeItem('user');
+                navigate('/auth/login');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMsg = error.message;
+                console.log(errorCode, errorMsg);
+            });
     };
 
     const sideList = () => (
@@ -108,6 +126,7 @@ const Sidebar = ({ route }) => {
                     </li>
                 ))}
                 <li
+                    onClick={logOut}
                     style={{
                         display: 'flex',
                         alignItems: 'center',
