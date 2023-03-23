@@ -28,6 +28,10 @@ const AppRouter = () => {
                         path="register"
                         element={<AuthPage route="register" />}
                     />
+                    <Route
+                        path="*"
+                        element={<Navigate to={'/auth/login'} replace={true} />}
+                    />
                 </Route>
                 <Route
                     path="*"
@@ -57,11 +61,13 @@ const AppRouter = () => {
                         path="users"
                         element={<DashboardPage route="users" />}
                     />
+                    <Route
+                        path="*"
+                        element={
+                            <Navigate to={'/posts?page=1'} replace={true} />
+                        }
+                    />
                 </Route>
-                <Route
-                    path="*"
-                    element={<Navigate to={'/auth/login'} replace={true} />}
-                />
             </Route>
         )
     );
